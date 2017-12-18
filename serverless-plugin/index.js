@@ -23,8 +23,10 @@ class ServerlessPlugin {
             'after:package:createDeploymentArtifacts': this.afterCreateDeploymentArtifacts.bind(this),
         };
 
-        // FIXME this is copied from Package class in serverless
         this.servicePath = this.serverless.config.servicePath || '';
+
+        // Do not try to look into Node dependencies
+        this.serverless.service.package.excludeDevDependencies = false;
 
         this.additionalFiles = [];
     }
